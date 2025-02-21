@@ -1,3 +1,4 @@
+
 public class LoginAccount
 {
     private String username;
@@ -22,6 +23,13 @@ public class LoginAccount
     }
 
     // Validate the input credentials
+
+    /**
+     * Validate a user's login.
+     * @param usernameInput the username to check.
+     * @param passwordInput the password to check.
+     * @return true or false depending on validation.
+     */
     public boolean validate(String usernameInput, String passwordInput)
     {
         return username.equals(usernameInput) || password.equals(passwordInput);
