@@ -10,7 +10,8 @@ public class LoginPageView {
     private JPasswordField passwordField;
     private JButton loginButton;
 
-    public LoginPageView() {
+    public LoginPageView()
+    {
         frame = new JFrame("Login Page");
         frame.setSize(350, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,9 +26,11 @@ public class LoginPageView {
         frame.add(passwordField);
 
         loginButton = new JButton("Login");
-        loginButton.addActionListener(new ActionListener() {
+        loginButton.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
 
@@ -35,15 +38,24 @@ public class LoginPageView {
                 // pull from the loginInfo HashMap
                 // creating an instance of the LoginAccounts class to call the getter method on
 
+                // it's okay to be creating new instances within this actonPerformed method?
+
                 LoginAccounts loginAccounts = new LoginAccounts();
                 HashMap <String, String> loginInfo = loginAccounts.getLoginInfo();
 
-                if (loginInfo.containsKey(username) && loginInfo.containsValue(password)) {
+                if (loginInfo.containsKey(username) && loginInfo.get(username).equals(password))
+                {
                     JOptionPane.showMessageDialog(frame, "Login Successful!");
                     // open up main screen
                     // new MainPageView.java
                     // same way for new LoginPageView() in FirstTimeUserPrompt:46
-                } else {
+
+                    frame.dispose();
+                    new MainPageView();
+
+                }
+                else
+                {
                     JOptionPane.showMessageDialog(frame, "Invalid credentials, try again.");
                 }
             }

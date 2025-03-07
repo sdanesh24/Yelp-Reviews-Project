@@ -5,7 +5,7 @@ public class MainApplication
     public static void main(String[] str)
     {
         // Load fake accounts into memory
-        // Can insert/delete but will always remove at the end of the program
+        // Can insert/delete but will always remove accounts at the end of the program
 
         LoginAccounts currentUser = new LoginAccounts();
         currentUser.makeJunkAccounts();
