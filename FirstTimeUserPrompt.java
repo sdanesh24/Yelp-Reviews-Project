@@ -3,13 +3,15 @@ import javax.swing.*;
         import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FirstTimeUserPrompt {
+public class FirstTimeUserPrompt
+{
     private JFrame frame;
     private JCheckBox yesCheckBox;
     private JCheckBox noCheckBox;
     private JButton enterButton;
 
-    public FirstTimeUserPrompt() {
+    public FirstTimeUserPrompt()
+    {
         frame = new JFrame("User Prompt");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 200);
@@ -30,18 +32,25 @@ public class FirstTimeUserPrompt {
         frame.add(checkBoxPanel);
 
         enterButton = new JButton("Enter");
-        enterButton.addActionListener(new ActionListener() {
+        enterButton.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!yesCheckBox.isSelected() && !noCheckBox.isSelected()) {
+            public void actionPerformed(ActionEvent e)
+            {
+                if (!yesCheckBox.isSelected() && !noCheckBox.isSelected())
+                {
                     JOptionPane.showMessageDialog(frame, "Are you a first time user?");
-                } else if (yesCheckBox.isSelected()) {
+                }
+                else if (yesCheckBox.isSelected())
+                {
                     frame.dispose();
 
                     LoginAccounts loginAccounts = new LoginAccounts();
 
                     new NewUserRegistration(loginAccounts);
-                } else {
+                }
+                else
+                {
                     frame.dispose();
                     new LoginPageView();
                 }
