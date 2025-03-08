@@ -51,6 +51,7 @@ public class MainPageView
         submitButton.addActionListener(new ActionListener()
         {
             @Override
+            // actionPerformed is the calling method of scrapeReviews
             public void actionPerformed(ActionEvent e)
             {
                 String userLocation = locationField.getText().trim();
