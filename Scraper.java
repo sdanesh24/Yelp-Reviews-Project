@@ -68,7 +68,7 @@ public class Scraper
                 StringBuilder address = new StringBuilder();
                 for (JsonElement displayAddress : displayAddressArray)
                 {
-                    address.append(displayAddress.getAsString()).append(",");
+                    address.append(displayAddress.getAsString()).append(" ,");
                 }
 
                 String location = address.substring(0, address.length() - 2);
