@@ -12,7 +12,7 @@ public class Scraper
 {
     // we don't need a constructor method for this class because there are no instance variables of the class
     // these aren't considered instance variables because they are static and belong to the class
-    private static final String API_KEY = "6zHHvZ8FsLC9qBnjcUi4uP5bTEpDN49g0VY7bbPCnTLl1Mbhm2QE5YghsHNUuX7y4eys4bOE9a7-MKp8XlfP0Jvitk3ZDT4aDdGP4sYdaF1XxqrfGb95C1cv7vPFZ3Yx";
+    private static final String API_KEY = System.getenv("YELP_API_KEY");
 
     private static final String BASE_URL = "https://api.yelp.com/v3";
 
@@ -83,7 +83,7 @@ public class Scraper
                     categoryTitles.add(categoryObject.get("title").getAsString());
                 }
 
-                String category = String.join(",", categoryTitles);
+                String category = String.join(" ,", categoryTitles);
 
                 // creating an instance of YelpReview to save each business in the loop to
                 YelpReview business = new YelpReview(location, category, name, rating, reviewCount);
