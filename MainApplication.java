@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.util.List;
 
 public class MainApplication
 {
@@ -10,8 +11,9 @@ public class MainApplication
         LoginAccounts currentUser = new LoginAccounts();
         currentUser.makeJunkAccounts();
         currentUser.printLoginInfo();
-        FirstTimeUserPrompt ftup = new FirstTimeUserPrompt();
+        FirstTimeUserPrompt ftup = new FirstTimeUserPrompt();;
 
+        //TODO: prompt user to put in where they want the file to be downloaded to?
 
         // Create an application
         // User logs in via login page

@@ -16,14 +16,19 @@ public class Scraper
 
     private static final String BASE_URL = "https://api.yelp.com/v3";
 
+    public static List<YelpReview> reviewsList = new ArrayList<>();
+
     // creating a method called scrapeYelpReviews to return reviewsList - a list of YelpReview values
     // pull params of location and category from user input
     public static List<YelpReview> scrapeReviews(String userLocation, String userCategory) {
-        List<YelpReview> reviewsList = new ArrayList<>();
+
+        reviewsList.clear();
 
         try {
             // calling the Business Search endpoint to search businesses by location and category
             String apiURL = BASE_URL + "/businesses/search?location=" + userLocation + "&categories=" + userCategory;
+            // TODO: add in logic here (for loop?) to handle spaces if entered in userLocation and userCategory
+
             URL url = new URL(apiURL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -68,7 +73,7 @@ public class Scraper
                 StringBuilder address = new StringBuilder();
                 for (JsonElement displayAddress : displayAddressArray)
                 {
-                    address.append(displayAddress.getAsString()).append(" ,");
+                    address.append(displayAddress.getAsString()).append(", ");
                 }
 
                 String location = address.substring(0, address.length() - 2);
@@ -83,7 +88,7 @@ public class Scraper
                     categoryTitles.add(categoryObject.get("title").getAsString());
                 }
 
-                String category = String.join(" ,", categoryTitles);
+                String category = String.join(", ", categoryTitles);
 
                 // creating an instance of YelpReview to save each business in the loop to
                 YelpReview business = new YelpReview(location, category, name, rating, reviewCount);
@@ -96,9 +101,17 @@ public class Scraper
         }
 
         System.out.println(reviewsList);
+        System.out.println("Your search pulled " + reviewsList.size() + " businesses");
 
         //new GraphView();
 
-        return (reviewsList);
+        return reviewsList;
+    }
+
+    // creating a getter method to return reviewsList in the ExcelExport class
+
+    public static List <YelpReview> getReviewsList()
+    {
+        return reviewsList;
     }
 }

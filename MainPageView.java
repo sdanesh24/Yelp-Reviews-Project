@@ -6,6 +6,9 @@ import java.net.URI;
 
 public class MainPageView
 {
+    private static String userLocation;
+    private static String userCategory;
+
     public MainPageView()
     {
         JFrame frame = new JFrame("Yelp Business Search");
@@ -54,8 +57,8 @@ public class MainPageView
             // actionPerformed is the calling method of scrapeReviews
             public void actionPerformed(ActionEvent e)
             {
-                String userLocation = locationField.getText().trim();
-                String userCategory = categoryField.getText().trim();
+                userLocation = locationField.getText().trim();
+                userCategory = categoryField.getText().trim();
 
                 // don't need to create an instance of the Scraper class because the scrapeReviews method is static
                     //Scraper scraper = new Scraper();
@@ -64,9 +67,15 @@ public class MainPageView
                 {
                     JOptionPane.showMessageDialog(frame, "Searching for " + userCategory + " in " + userLocation);
 
+                    // calling scrapeReviews and excelExporter once user inputs data
+                    // how did I know to put the scrapeReviews method here???
                     Scraper.scrapeReviews(userLocation, userCategory);
 
-                } else
+                    String filePath = System.getProperty("user.home") + "/Downloads/YelpReviews.xlsx";
+                    ExcelExport.excelExporter(filePath);
+
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(frame, "Please enter both location and category.", "Input Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -85,5 +94,16 @@ public class MainPageView
 
         // Make frame visible
         frame.setVisible(true);
+    }
+
+    // creating getter methods for userLocation and userCategory to run the scraper method in main
+    public static String getUserLocation()
+    {
+        return userLocation;
+    }
+
+    public static String getUserCategory()
+    {
+        return userCategory;
     }
 }
