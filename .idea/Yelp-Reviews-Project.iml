@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="Hibernate" />
+        <datasource-mapping>
+          <factory-entry name="Yelp-Reviews-Project" value="d55fe44c-447e-4413-8408-2dcb0bf96126" />
+        </datasource-mapping>
+        <naming-strategy-map />
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
@@ -9,5 +21,10 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="google.code.gson" level="project" />
     <orderEntry type="library" exported="" name="apache.poi.ooxml" level="project" />
+    <orderEntry type="library" name="formdev.flatlaf" level="project" />
+    <orderEntry type="library" name="springframework.boot.spring.starter.data.jpa" level="project" />
+    <orderEntry type="library" name="postgresql" level="project" />
+    <orderEntry type="library" name="jakarta.persistence.api" level="project" />
+    <orderEntry type="library" name="apache.commons.math3" level="project" />
   </component>
 </module>

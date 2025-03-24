@@ -1,6 +1,21 @@
 import javax.swing.*;
 import java.util.List;
 
+//LoginAccount and LoginFrame are first example classes made in the program
+
+// mysql database
+// hibernate
+// jpa
+// java
+// yelp api
+// maven
+// apache poi
+// java swing
+
+// calculator app:
+// java
+// java swing
+
 public class MainApplication
 {
     public static void main(String[] str)
