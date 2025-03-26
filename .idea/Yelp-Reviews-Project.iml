@@ -7,24 +7,27 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="Yelp-Reviews-Project" value="d55fe44c-447e-4413-8408-2dcb0bf96126" />
+          <factory-entry name="userPU" value="db6d9102-35c2-4009-a55b-3635eab1a5a3" />
         </datasource-mapping>
         <naming-strategy-map />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="google.code.gson" level="project" />
     <orderEntry type="library" exported="" name="apache.poi.ooxml" level="project" />
     <orderEntry type="library" name="formdev.flatlaf" level="project" />
-    <orderEntry type="library" name="springframework.boot.spring.starter.data.jpa" level="project" />
-    <orderEntry type="library" name="postgresql" level="project" />
     <orderEntry type="library" name="jakarta.persistence.api" level="project" />
     <orderEntry type="library" name="apache.commons.math3" level="project" />
+    <orderEntry type="library" name="postgresql" level="project" />
+    <orderEntry type="library" name="hibernate.orm.core" level="project" />
+    <orderEntry type="library" name="springframework.data.spring.jpa" level="project" />
   </component>
 </module>

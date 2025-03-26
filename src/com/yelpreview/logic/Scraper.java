@@ -1,9 +1,11 @@
-// need further explanation of these packages and how they make the API work
+package com.yelpreview.logic;// need further explanation of these packages and how they make the API work
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.ArrayList;
 import com.google.gson.*;
@@ -18,7 +20,7 @@ public class Scraper
 
     public static List<YelpReview> reviewsList = new ArrayList<>();
 
-    // creating a method called scrapeYelpReviews to return reviewsList - a list of YelpReview values
+    // creating a method called scrapeYelpReviews to return reviewsList - a list of com.yelpreview.logic.YelpReview values
     // pull params of location and category from user input
     public static List<YelpReview> scrapeReviews(String userLocation, String userCategory) {
 
@@ -26,8 +28,11 @@ public class Scraper
 
         try {
             // calling the Business Search endpoint to search businesses by location and category
-            String apiURL = BASE_URL + "/businesses/search?location=" + userLocation + "&categories=" + userCategory;
-            // TODO: add in logic here (for loop?) to handle spaces if entered in userLocation and userCategory
+
+            String encodedLocation = URLEncoder.encode(userLocation, StandardCharsets.UTF_8);
+            String encodedCategory = URLEncoder.encode(userCategory, StandardCharsets.UTF_8);
+
+            String apiURL = BASE_URL + "/businesses/search?location=" + encodedLocation + "&categories=" + encodedCategory;
 
             URL url = new URL(apiURL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -54,7 +59,7 @@ public class Scraper
             // saving the list from jsonObject as a JsonArray
             JsonArray jsonArrayBusinesses = jsonObject.getAsJsonArray("businesses");
 
-            // looping through the array to extract instance fields of YelpReview class objects - individual businesses
+            // looping through the array to extract instance fields of com.yelpreview.logic.YelpReview class objects - individual businesses
             // saving each instance to reviewsList
             for (JsonElement businessElement : jsonArrayBusinesses) {
                 JsonObject businessObject = businessElement.getAsJsonObject();
@@ -90,10 +95,10 @@ public class Scraper
 
                 String category = String.join(", ", categoryTitles);
 
-                // creating an instance of YelpReview to save each business in the loop to
+                // creating an instance of com.yelpreview.logic.YelpReview to save each business in the loop to
                 YelpReview business = new YelpReview(location, category, name, rating, reviewCount);
 
-                // appending (adding) each instance of YelpReview to reviewsList
+                // appending (adding) each instance of com.yelpreview.logic.YelpReview to reviewsList
                 reviewsList.add(business);
             }
         } catch (Exception e) {
@@ -108,7 +113,7 @@ public class Scraper
         return reviewsList;
     }
 
-    // creating a getter method to return reviewsList in the ExcelExport class
+    // creating a getter method to return reviewsList in the com.yelpreview.logic.ExcelExport class
 
     public static List <YelpReview> getReviewsList()
     {

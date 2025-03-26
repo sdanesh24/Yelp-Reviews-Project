@@ -1,3 +1,9 @@
+package com.yelpreview.view;
+
+import com.yelpreview.logic.LoginAccounts;
+import com.yelpreview.model.*;
+import jakarta.persistence.EntityManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -39,13 +45,20 @@ public class NewUserRegistration {
                 if (username.isEmpty() || password.isEmpty()) {
                     JOptionPane.showMessageDialog(frame, "All fields must be filled.");
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Registration Successful!");
-
                     loginAccounts.storeUser(username, password);
                     loginAccounts.printLoginInfo();
 
+                    User user = new User(username, password);
+                    EntityManager entityManager = JpaUtility.getEntityManager();
+                    entityManager.getTransaction().begin();
+                    entityManager.persist(user);
+                    entityManager.getTransaction().commit();
+                    entityManager.close();
+
+                    JOptionPane.showMessageDialog(frame, "Registration Successful!");
+;
                     frame.dispose();
-                    new LoginPageView(); // Redirect to Login Page after registration
+                    new LoginPageView();
                 }
             }
         });
@@ -55,7 +68,7 @@ public class NewUserRegistration {
 
         frame.setVisible(true);
     }
-    // creating getter methods to pull username and password into LoginAccounts
+    // creating getter methods to pull username and password into com.yelpreview.logic.LoginAccounts
     public String getUsername()
     {
         return username;

@@ -1,3 +1,5 @@
+package com.yelpreview.logic;
+
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.AreaReference;
@@ -14,7 +16,7 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableStyleInfo;
 public class ExcelExport
 {
     private static List<YelpReview> reviewsList = Scraper.getReviewsList();
-    // creating column values for rating and review count to calculate mean and median on
+    // creating column values for rating and reviewCount to calculate mean and median
     private static List<Double> ratingColumn = new ArrayList<>();
     private static List<Integer> reviewCountColumn = new ArrayList<>();
 
@@ -22,8 +24,6 @@ public class ExcelExport
     {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Yelp API Output");
-
-        // creating a list to store reviewsList values accessed with the getter method
 
         Row rowHeader = sheet.createRow(0);
 
@@ -52,7 +52,7 @@ public class ExcelExport
         // calculating the SafaScore for each object and then setting/saving them
         for (YelpReview object : reviewsList)
         {
-            double safaScore = safaScoreCalculator(object.getRating(), object.getReviewCount(), meanRatingColumn, medianReviewCountColumn);
+            double safaScore = safaScoreCalculator(object.getRating(), object.getReviewCount(), medianReviewCountColumn, meanRatingColumn);
             object.setSafaScore(safaScore);
         }
 
@@ -132,9 +132,33 @@ public class ExcelExport
         }
     }
 
+    /**
+     * Calculates the SafaScore for a business using a Bayesian weighted average formula.
+     * <p>
+     * This score adjusts a business's raw average rating based on the number of reviews it has,
+     * and weighs it against the global average rating across all businesses.
+     * The formula used is:
+     * <pre>
+     *     SafaScore = ((r * v) + (C * m)) / (v + m)
+     * </pre>
+     * where:
+     * <ul>
+     *   <li><b>r</b> is the business's average rating</li>
+     *   <li><b>v</b> is the number of reviews for the business</li>
+     *   <li><b>C</b> is the mean rating across all businesses</li>
+     *   <li><b>m</b> is the median number of reviews across all businesses</li>
+     * </ul>
+     * The result is rounded to two decimal places and is intended to remain within a 0–5 rating scale.
+     *
+     * @param rating the average rating of the business (r)
+     * @param reviewCount the number of reviews the business has (v)
+     * @param meanRating the global average rating across all businesses (C)
+     * @param medianReviewCount the median number of reviews across all businesses (m)
+     * @return the SafaScore as a double, rounded to two decimal places
+     */
+
     private static double safaScoreCalculator(double rating, int reviewCount, double medianReviewCount, double meanRating)
     {
-        // Bayesian weighted average of each business
         double safaScore = ((rating * reviewCount) + (meanRating * medianReviewCount)) / (reviewCount + medianReviewCount);
         double roundedSafaScore = Math.round(safaScore * 100.0) / 100.0;
         return roundedSafaScore;

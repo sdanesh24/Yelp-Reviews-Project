@@ -1,3 +1,5 @@
+package com.yelpreview.logic;
+
 public class YelpReview
 {
     // all within the /businesses/search endpoint
@@ -27,11 +29,11 @@ public class YelpReview
         this.reviewCount = reviewCount;
     }
 
-    // so the output of the list of YelpReview objects, reviewsList, returns data within the object not the memory address of the object
+    // so the output of the list of com.yelpreview.logic.YelpReview objects, reviewsList, returns data within the object not the memory address of the object
     @Override
     public String toString()
     {
-        return "YelpReview {" + "Name: " + name +
+        return "com.yelpreview.logic.YelpReview {" + "Name: " + name +
                 ", Rating: " + rating +
                 ", Location: " + location +
                 ", Category: " + category +

@@ -1,9 +1,13 @@
+package com.yelpreview.view;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URI;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.yelpreview.logic.ExcelExport;
+import com.yelpreview.logic.Scraper;
 
 public class MainPageView {
     private static String userLocation;

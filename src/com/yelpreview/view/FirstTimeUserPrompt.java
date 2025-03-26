@@ -1,4 +1,6 @@
-//TODO: find another UI package that looks better/less boring??
+package com.yelpreview.view;//TODO: find another UI package that looks better/less boring??
+
+import com.yelpreview.logic.LoginAccounts;
 
 import javax.swing.*;
         import java.awt.*;

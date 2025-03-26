@@ -1,14 +1,18 @@
+package com.yelpreview.logic;
+
+import com.yelpreview.view.NewUserRegistration;
+
 import java.util.HashMap;
 
 public class LoginAccounts {
 
-    //instance fields of the LoginAccounts class
+    //instance fields of the com.yelpreview.logic.LoginAccounts class
 
     String username;
     String password;
     //String adminPrivilege;
 
-    // allowing for instances of LoginAccounts to be created without a username and password to be passed in constructor
+    // allowing for instances of com.yelpreview.logic.LoginAccounts to be created without a username and password to be passed in constructor
     public LoginAccounts()
     {
      this.username = "";
@@ -21,7 +25,7 @@ public class LoginAccounts {
         this.password = password;
     }
 
-    private static HashMap <String, String> loginInfo = new HashMap <String, String>();
+    public static HashMap <String, String> loginInfo = new HashMap <String, String>();
 
     // creating a getter method so loginInfo HM can be accessed in other classes
     public HashMap <String, String> getLoginInfo()

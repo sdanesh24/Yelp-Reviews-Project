@@ -1,8 +1,17 @@
+package com.yelpreview.view;
+
+import com.yelpreview.logic.LoginAccounts;
+import com.yelpreview.model.JpaUtility;
+import com.yelpreview.model.User;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class LoginPageView {
     private JFrame frame;
@@ -35,24 +44,25 @@ public class LoginPageView {
                 String password = new String(passwordField.getPassword());
 
                 // validate user
-                // pull from the loginInfo HashMap
-                // creating an instance of the LoginAccounts class to call the getter method on
+                // old method before DB implemented = pull from the loginInfo HashMap
+                    // creating an instance of the com.yelpreview.logic.LoginAccounts class to call the getter method on
+                    // LoginAccounts loginAccounts = new LoginAccounts();
+                    // HashMap <String, String> loginInfo = loginAccounts.getLoginInfo();
 
                 // it's okay to be creating new instances within this actonPerformed method?
 
-                LoginAccounts loginAccounts = new LoginAccounts();
-                HashMap <String, String> loginInfo = loginAccounts.getLoginInfo();
+                EntityManager entityManager = JpaUtility.getEntityManager();
+                TypedQuery<User> query = entityManager.createQuery(
+                        "SELECT person FROM User person WHERE person.username = :username AND person.password = :password", User.class);
+                query.setParameter("username", username);
+                query.setParameter("password", password);
+                List<User> matchingUsers = query.getResultList();
 
-                if (loginInfo.containsKey(username) && loginInfo.get(username).equals(password))
+                if (!matchingUsers.isEmpty())
                 {
                     JOptionPane.showMessageDialog(frame, "Login Successful!");
-                    // open up main screen
-                    // new MainPageView.java
-                    // same way for new LoginPageView() in FirstTimeUserPrompt:46
-
                     frame.dispose();
                     new MainPageView();
-
                 }
                 else
                 {
