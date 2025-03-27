@@ -26,9 +26,9 @@ public class MainApplication
         // Load fake accounts into memory
         // Can insert/delete but will always remove accounts at the end of the program
 
-        LoginAccounts currentUser = new LoginAccounts();
-        currentUser.makeJunkAccounts();
-        currentUser.printLoginInfo();
+        //LoginAccounts currentUser = new LoginAccounts();
+        //currentUser.makeJunkAccounts();
+        //currentUser.printLoginInfo();
         FirstTimeUserPrompt ftup = new FirstTimeUserPrompt();
     }
 

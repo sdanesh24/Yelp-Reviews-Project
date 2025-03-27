@@ -13,7 +13,8 @@ public class MainPageView {
     private static String userLocation;
     private static String userCategory;
 
-    public MainPageView() {
+    public MainPageView()
+    {
         // Set FlatLaf Look and Feel
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -103,12 +104,15 @@ public class MainPageView {
                     // Call scrapeReviews and excelExporter after input
                     Scraper.scrapeReviews(userLocation, userCategory);
 
-                    String filePath = System.getProperty("user.home") + "/Downloads/YelpReviews.xlsx";
-                    ExcelExport.excelExporter(filePath);
+                    new UserExcelSave();
 
-                } else {
+                }
+                else
+                {
                     JOptionPane.showMessageDialog(frame, "Please enter both location and category.", "Input Error", JOptionPane.ERROR_MESSAGE);
                 }
+
+                frame.dispose();
             }
         });
 
